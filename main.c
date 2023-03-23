@@ -7,7 +7,7 @@
 
 int main()
 {
-    int i = 2;                          //새로 뽑은 카드 수
+    int i = 0;                          //새로 뽑은 카드 수
     int mi;                             //메인메뉴 입력 정수
 	int money = 10000;					//기본 지급 돈
 	int pay;						    //참가 비용
@@ -19,10 +19,22 @@ int main()
     int card3[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0};            //뽑을 카드 최대 9장
     char suit3[9][10];                                      //뽑을 카드의 모양
     char num3[9][50];                                       //뽑을 카드의 숫자와 문자
+    char x[9];
+    char y[9];
+    char yn[1];
 
     SetConsoleTitle("Black-Jack");              //콘솔창 이름 변경
     while(1)                                    //시작화면 코딩
     {
+start:
+    i=0;
+    temp=0;
+    int card3[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0};            //뽑을 카드 최대 9장
+    suit3[9][10];                                      //뽑을 카드의 모양
+    num3[9][50];                                       //뽑을 카드의 숫자와 문자
+    x[9];
+    y[9];
+    yn[1];
         printf("블랙잭\n");
         printf("1. 블랙잭 시작\n");
         printf("2. 블랙잭 규칙\n");
@@ -228,10 +240,59 @@ case2:                                                              //goto 여기�
         printf("보유 머니 : %d\n", money);
         printf("총 점수 : %d\n\n", temp);
         printf("첫 번째 카드 : %s %s\n", suit1, num1);
-        printf("두 번째 카드 : %s %s\n\n", suit2, num2);
+        printf("두 번째 카드 : %s %s\n", suit2, num2);
         switch(i) {
+        case(1):
+            printf("세 번째 카드 : %s %s\n", suit3[1], num3[1]);
+            break;
+        case(2):
+            printf("세 번째 카드 : %s %s\n", suit3[1], num3[1]);
+            printf("네 번째 카드 : %s %s\n", suit3[2], num3[2]);
+            break;
         case(3):
-            printf("세 번째 카드 : %s %s\n\n", suit2, num2);
+            printf("세 번째 카드 : %s %s\n", suit3[1], num3[1]);
+            printf("네 번째 카드 : %s %s\n", suit3[2], num3[2]);
+            printf("다섯 번째 카드 : %s %s\n", suit3[3], num3[3]);
+            break;
+        case(4):
+            printf("세 번째 카드 : %s %s\n", suit3[1], num3[1]);
+            printf("네 번째 카드 : %s %s\n", suit3[2], num3[2]);
+            printf("다섯 번째 카드 : %s %s\n", suit3[3], num3[3]);
+            printf("여섯 번째 카드 : %s %s\n", suit3[4], num3[4]);
+            break;
+        }
+        if(temp==21){
+            printf("성공하셨습니다.");
+            money = pay*2;
+            printf("보유머니 : %d\n", money);
+            printf("다시하시겠습니까?(y/n): ");
+            scanf("%s", &yn);
+            if(strcmp(yn,"y")==0){
+                system("cls");
+                goto start;
+
+            }
+            else if(strcmp(yn,"n")==0) return 1;
+            else{
+                printf("알수없는 명령어입니다");
+                return 1;
+            }
+        }
+        if(temp>=22){
+            system("cls");
+            printf("패배하셨습니다.\n점수:%d\n", temp);
+            printf("다시하시겠습니까?(y/n): ");
+            scanf("%s", &yn);
+            if(strcmp(yn,"y")==0){
+                system("cls");
+                goto start;
+
+            }
+            else if(strcmp(yn,"n")==0) return 1;
+            else{
+                printf("알수없는 명령어입니다");
+                return 1;
+            }
         }
         Sleep(1000);
         printf("1. 한장 더 뽑으실려면 hit\n2. 멈추실려면 stand\n3.같은 숫자를 나누실려면 double를 입력해주세요\n");
@@ -240,8 +301,60 @@ case2:                                                              //goto 여기�
         if(strcmp(plus,"hit")==0){
             printf("hit!!\n");
             i++;
+            random1 = rand()%4+1;
+            card3[i] = rand()%13+1;
+            switch(random1){                //첫 번째 카드 모양, 숫자 정하기
+            case (1) :
+                sprintf(suit3[i], "Spade");
+                if(card3[i]==1) sprintf(num3[i], "A");
+                else if(card3[i]==11) sprintf(num3[i], "J");
+                else if(card3[i]==12) sprintf(num3[i], "Q");
+                else if(card3[i]==13) sprintf(num3[i], "K");
+                else sprintf(num3[i], "%d", card3[i]);
+                break;
+
+            case (2) :
+                sprintf(suit3[i], "Heart");
+                if(card3[i]==1) sprintf(num3[i], "A");
+                else if(card3[i]==11) sprintf(num3[i], "J");
+                else if(card3[i]==12) sprintf(num3[i], "Q");
+                else if(card3[i]==13) sprintf(num3[i], "K");
+                else sprintf(num3[i], "%d", card3[i]);
+                break;
+
+            case (3) :
+                sprintf(suit3[i], "Diamond");
+                if(card3[i]==1) sprintf(num3[i], "A");
+                else if(card3[i]==11) sprintf(num3[i], "J");
+                else if(card3[i]==12) sprintf(num3[i], "Q");
+                else if(card3[i]==13) sprintf(num3[i], "K");
+                else sprintf(num3[i], "%d", card3[i]);
+                break;
+
+            case (4) :
+                sprintf(suit3[i], "Club");
+                if(card3[i]==1) sprintf(num3[i], "A");
+                else if(card3[i]==11) sprintf(num3[i], "J");
+                else if(card3[i]==12) sprintf(num3[i], "Q");
+                else if(card3[i]==13) sprintf(num3[i], "K");
+                else sprintf(num3[i], "%d", card3[i]);
+                break;
+            }
+            switch(card3[i]){                  //카드 2의 알파벳 계산
+            case(1) :
+                if(card3[i]+temp>21) card3[i] = 1;
+                else card3[i] = 11;
+            case(11) :
+                card3[i] = 10;
+            case(12) :
+                card3[i] = 10;
+            case(13) :
+                card3[i] = 10;
+            }
+            temp += card3[i];
             Sleep(1000);
-            break;
+            system("cls");
+            continue;
         }
         if(strcmp(plus,"stand")==0){
             printf("멈추셨습니다.\n");
@@ -268,3 +381,4 @@ case2:                                                              //goto 여기�
         }
 
 }
+
