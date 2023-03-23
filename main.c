@@ -14,7 +14,7 @@ int main()
 	int temp = 0;                       //ÃÑ Á¡¼ö
 	char back[10];                      //¼³¸í ³ª°¡±â char
     char num1[50], num2[50];            //Ä«µå ¼ýÀÚ¿Í ¹®ÀÚ(A, J, Q, K)
-    char plus[6];                       //Hit, Double, Stand ÀÔ·Â¹Þ´Â ¹®ÀÚ¿­
+    char plus[6];                       //Hit, Split, Stand ÀÔ·Â¹Þ´Â ¹®ÀÚ¿­
     char suit1[10], suit2[10];          //Ä«µåÀÇ ¸ð¾ç
     int card3[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0};            //»ÌÀ» Ä«µå ÃÖ´ë 9Àå
     char suit3[9][10];                                      //»ÌÀ» Ä«µåÀÇ ¸ð¾ç
@@ -49,7 +49,22 @@ start:
         case(2) :
 case2:                                                              //goto ¿©±â·Î ÀÌµ¿
             system("cls");
-            printf("1. Ã³À½¿¡ ¹èÆÃÀ» ÇÒ µ·À»....\n");                //ºí·¢Àè ±ÔÄ¢¼³¸í Àû¾î¾ßÇÔ
+            printf("ºí·¢Àè ±ÔÄ¢\n");
+            printf("1. Ã³À½¿¡ ¹èÆÃÀ» ÇÒ µ·À» Á¤ÇÕ´Ï´Ù\n");                //ºí·¢Àè ±ÔÄ¢¼³¸í Àû¾î¾ßÇÔ
+            printf("2. ·£´ýÇÑ Ä«µå 2ÀåÀ» ¹Þ½À´Ï´Ù\n");
+            printf("3. 21¿¡ °¡±î¿öÁú¶§±îÁö hit¸í·É¾î·Î Ä«µå¸¦ »Ì½À´Ï´Ù\n");
+            printf("4. 21Á¡À» ¾òÀ¸¸é ¼º°ø 21Á¡À» ³ÑÀ¸¸é Å»¶ôÀÔ´Ï´Ù\n");
+            printf("5. ¼º°øÇÏ¿´´Ù¸é ¹èÆÃÀ» Çß´ø ±Ý¾×¿¡ 2¹è¸¦ ¹Þ½À´Ï´Ù\n");
+            printf("\n");
+            printf("Á¡¼öÇ¥\n");
+            printf("A = 1Á¡ or 11Á¡\n");
+            printf("2~10 = ±× ¼ýÀÚ¿Í µ¿ÀÏÇÑ Á¡¼ö\n");
+            printf("J, Q, K = 10Á¡\n\n");
+            printf("\n");
+            printf("°ÔÀÓ ¸í·É¾î\n");
+            printf("hit = ·£´ýÇÑ Ä«µå ÇÑÀåÀ» »Ì½À´Ï´Ù.\n");
+            printf("stand = Ä«µå¸¦ ±×¸¸ »Ì½À´Ï´Ù.\n");
+            printf("split = °°Àº ¼ýÀÚ Ä«µå¸¦ ³ª´¯´Ï´Ù.\n\n");
             printf("µ¹¾Æ°¡½Ç·Á¸é back¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
             scanf("%s", back);
             if((strcmp(back,"back")==0)){                           //¸í··¾î back¸¦ ¾²¸é ¸ÞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°¨
@@ -73,12 +88,18 @@ case2:                                                              //goto ¿©±â·
         }
         break;
     }
+    if(money<1000){
+            printf("µ·ÀÌ Àû¾î Áö¿ø±ÝÀ¸·Î 5000¸Ó´Ï¸¦ µå¸³´Ï´Ù");         //µ·ÀÌ ¾øÀ¸¸é 5000¸Ó´Ï¸¦ ÁÖ´Â ÄÚµå
+            money += 5000;
+            Sleep(2000);
+            system("cls");
+        }
 	while(1)					//¹«ÇÑ ¹Ýº¹
 	{
+
 		printf("º¸À¯ ¸Ó´Ï : %d\n", money);
 		printf("Âü°¡ºñ¿ë(ÃÖ¼Ò 1000) : ");
 		scanf("%d", &pay);
-
 		if (money < pay)		 //¸¸¾à °¡Áö°í ÀÖ´Â ¸Ó´Ïº¸´Ù Âü°¡ ºñ¿ëÀÌ ´õ Å©´Ù¸é
 		{
 			printf("°¡Áö°í ÀÖ´Â µ·ÀÌ Àû½À´Ï´Ù");
@@ -209,7 +230,17 @@ case2:                                                              //goto ¿©±â·
         else break;
     }
 
-
+    if(card1 == card2)
+    {
+        printf("SplitÀÌ °¡´ÉÇÕ´Ï´Ù ÇÏ½Ã°Ú½À´Ï±î?(y/n) : ");         //°°Àº ¼ýÀÚÀÇ Ä«µå°¡ ³ª¿ÔÀ» ¶§ µü ÇÑ¹ø °¡´ÉÇÑ Split(¹Ì¿Ï¼º)
+        scanf("%s", &yn);
+        if(strcmp(yn,"y")==0){
+                system("cls");
+                goto cs;
+            }
+            else if(strcmp(yn,"n")==0) goto cardtest;
+    }
+cardtest:
     switch(card1){                  //Ä«µå 1ÀÇ ¾ËÆÄºª °è»ê
     case(1) :
         card1 = 11;
@@ -232,16 +263,16 @@ case2:                                                              //goto ¿©±â·
     case(13) :
         card2 = 10;
     }
-
     system("cls");
-    temp = card1+card2;
+    temp = card1+card2;                                         //Ã¹¹øÂ° Ä«µå¿Í µÎ¹øÂ° Ä«µåÀÇ ÇÕÀ» temp¿¡ ÀúÀåÇÔ
     while(1)
     {
+nomal1:
         printf("º¸À¯ ¸Ó´Ï : %d\n", money);
         printf("ÃÑ Á¡¼ö : %d\n\n", temp);
         printf("Ã¹ ¹øÂ° Ä«µå : %s %s\n", suit1, num1);
         printf("µÎ ¹øÂ° Ä«µå : %s %s\n", suit2, num2);
-        switch(i) {
+        switch(i) {                                                     //2¹øÂ° Ä«µå ÀÌÈÄ Ä«µåµé
         case(1):
             printf("¼¼ ¹øÂ° Ä«µå : %s %s\n", suit3[1], num3[1]);
             break;
@@ -260,10 +291,34 @@ case2:                                                              //goto ¿©±â·
             printf("´Ù¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[3], num3[3]);
             printf("¿©¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[4], num3[4]);
             break;
+        case(5):
+            printf("¼¼ ¹øÂ° Ä«µå : %s %s\n", suit3[1], num3[1]);
+            printf("³× ¹øÂ° Ä«µå : %s %s\n", suit3[2], num3[2]);
+            printf("´Ù¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[3], num3[3]);
+            printf("¿©¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[4], num3[4]);
+            printf("ÀÏ°ö ¹øÂ° Ä«µå : %s %s\n", suit3[5], num3[5]);
+            break;
+        case(6):
+            printf("¼¼ ¹øÂ° Ä«µå : %s %s\n", suit3[1], num3[1]);
+            printf("³× ¹øÂ° Ä«µå : %s %s\n", suit3[2], num3[2]);
+            printf("´Ù¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[3], num3[3]);
+            printf("¿©¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[4], num3[4]);
+            printf("ÀÏ°ö ¹øÂ° Ä«µå : %s %s\n", suit3[5], num3[5]);
+            printf("¿©´ü ¹øÂ° Ä«µå : %s %s\n", suit3[6], num3[6]);
+            break;
+        case(7):
+            printf("¼¼ ¹øÂ° Ä«µå : %s %s\n", suit3[1], num3[1]);
+            printf("³× ¹øÂ° Ä«µå : %s %s\n", suit3[2], num3[2]);
+            printf("´Ù¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[3], num3[3]);
+            printf("¿©¼¸ ¹øÂ° Ä«µå : %s %s\n", suit3[4], num3[4]);
+            printf("ÀÏ°ö ¹øÂ° Ä«µå : %s %s\n", suit3[5], num3[5]);
+            printf("¿©´ü ¹øÂ° Ä«µå : %s %s\n", suit3[6], num3[6]);
+            printf("¾ÆÈ© ¹øÂ° Ä«µå : %s %s\n", suit3[7], num3[7]);
+            break;
         }
-        if(temp==21){
+        if(temp==21){                                       //21À» Á¤È®ÇÏ°Ô ¸ÂÃá´Ù¸é ¹èÆÃ 2¹è
             printf("¼º°øÇÏ¼Ì½À´Ï´Ù.");
-            money = pay*2;
+            money += pay*2;
             printf("º¸À¯¸Ó´Ï : %d\n", money);
             printf("´Ù½ÃÇÏ½Ã°Ú½À´Ï±î?(y/n): ");
             scanf("%s", &yn);
@@ -278,7 +333,7 @@ case2:                                                              //goto ¿©±â·
                 return 1;
             }
         }
-        if(temp>=22){
+        if(temp>=22){                                           //21À» ³Ñ±ä´Ù¸é ÆÐ¹è
             system("cls");
             printf("ÆÐ¹èÇÏ¼Ì½À´Ï´Ù.\nÁ¡¼ö:%d\n", temp);
             printf("´Ù½ÃÇÏ½Ã°Ú½À´Ï±î?(y/n): ");
@@ -295,15 +350,15 @@ case2:                                                              //goto ¿©±â·
             }
         }
         Sleep(1000);
-        printf("1. ÇÑÀå ´õ »ÌÀ¸½Ç·Á¸é hit\n2. ¸ØÃß½Ç·Á¸é stand\n3.°°Àº ¼ýÀÚ¸¦ ³ª´©½Ç·Á¸é double¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n");
+        printf("1. ÇÑÀå ´õ »ÌÀ¸½Ç·Á¸é hit\n2. ¸ØÃß½Ç·Á¸é stand\n");              //hit, stand¸¦ ¹°¾îº¸´Â Áú¹®
         printf("ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
         scanf("%s", plus);
-        if(strcmp(plus,"hit")==0){
+        if(strcmp(plus,"hit")==0){                                              //¸¸¾à hit¸¦ ÀÔ·ÂÇßÀ¸¸é »õ·Î¿î Ä«µå¸¦ »ÌÀ½
             printf("hit!!\n");
             i++;
             random1 = rand()%4+1;
             card3[i] = rand()%13+1;
-            switch(random1){                //Ã¹ ¹øÂ° Ä«µå ¸ð¾ç, ¼ýÀÚ Á¤ÇÏ±â
+            switch(random1){
             case (1) :
                 sprintf(suit3[i], "Spade");
                 if(card3[i]==1) sprintf(num3[i], "A");
@@ -356,18 +411,13 @@ case2:                                                              //goto ¿©±â·
             system("cls");
             continue;
         }
-        if(strcmp(plus,"stand")==0){
+        if(strcmp(plus,"stand")==0){                                //¸¸¾à stand¸¦ ÀÔ·ÂÇßÀ¸¸é Ä«µå¸¦ ±×¸¸»ÌÀ½
             printf("¸ØÃß¼Ì½À´Ï´Ù.\n");
             Sleep(1000);
             break;
         }
-        if(strcmp(plus,"double")==0){
-            printf("double\n");
-            Sleep(1000);
-            break;
-        }
         else{
-            printf("½ÇÆÐÇß½À´Ï´Ù.");
+            printf("½ÇÆÐÇß½À´Ï´Ù.");                                //ÀÌ»óÇÑ ´äµéÀ» ´Ù½Ã ½ÃÀÛÇÔ
             Sleep(1000);
             system("cls");
             continue;
@@ -376,9 +426,45 @@ case2:                                                              //goto ¿©±â·
     }
     system("cls");
     printf("º¸À¯ ¸Ó´Ï : %d\n", money);
-    if(strcmp(plus,"stand")==0){
-            printf("21Á¡±îÁö %d³²¾Ò½À´Ï´Ù.\n", 21-temp);
-        }
+    if(strcmp(plus,"stand")==0){                                    //stand¸¦ ÀÔ·ÂÇÑ´Ù¸é 21Á¡±îÁö ³²Àº Á¡¼ö¿Í ÀçµµÀü ¿©ºÎ¸¦ ¹°¾îº½
+        printf("21Á¡±îÁö %d³²¾Ò½À´Ï´Ù.\n", 21-temp);
+        printf("´Ù½ÃÇÏ½Ã°Ú½À´Ï±î?(y/n): ");
+            scanf("%s", &yn);
+            if(strcmp(yn,"y")==0){
+                system("cls");
+                goto start;
+
+            }
+    }
+cs:
+        switch(card1){                  //Ä«µå 1ÀÇ ¾ËÆÄºª °è»ê
+    case(1) :
+        card1 = 11;
+    case(11) :
+        card1 = 10;
+    case(12) :
+        card1 = 10;
+    case(13) :
+        card1 = 10;
+    }
+
+    switch(card2){                  //Ä«µå 2ÀÇ ¾ËÆÄºª °è»ê
+    case(1) :
+        if(card1<=11) card2 = 1;
+        else card2 = 11;
+    case(11) :
+        card2 = 10;
+    case(12) :
+        card2 = 10;
+    case(13) :
+        card2 = 10;
+    }
+    while(1)
+    {
+        printf("Ã¹ ¹øÂ° Ä«µå : %s %s\n       Ã¹ ¹øÂ° Ä«µå : %s %s\n", suit1, num1, suit2, num2);                  //splitÀ» ÇÏ¿´À»¶§ Ä«µå ³ª´®(¹Ì¾È¼º)
+        break;
+    }
+
 
 }
 
