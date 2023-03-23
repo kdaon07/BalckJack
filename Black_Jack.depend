@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1679549673 source:c:\users\±è´Ù¿Â\desktop\blackjack\black_jack\main.c
+	<stdio.h>
+	<stdlib.h>
+	<Windows.h>
+	<time.h>
+	<string.h>
+
