@@ -64,7 +64,7 @@ case2:                                                              //goto ¿©±â·
             printf("°ÔÀÓ ¸í·É¾î\n");
             printf("hit = ·£´ýÇÑ Ä«µå ÇÑÀåÀ» »Ì½À´Ï´Ù.\n");
             printf("stand = Ä«µå¸¦ ±×¸¸ »Ì½À´Ï´Ù.\n");
-            printf("split = °°Àº ¼ýÀÚ Ä«µå¸¦ ³ª´¯´Ï´Ù.\n\n");
+            printf("\n¸¸¾à stand¸¦ ÇÏ¸é ¹èÆÃÀÇ Àý¹ÝÀ» µ¹·Á¹Þ°í\n °ÔÀÓ¿¡¼­ ÆÐ¹èÇÑ´Ù¸é 0.1¹è¸¦ µ¹·Á¹Þ½À´Ï´Ù.\n\n");
             printf("µ¹¾Æ°¡½Ç·Á¸é back¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
             scanf("%s", back);
             if((strcmp(back,"back")==0)){                           //¸í··¾î back¸¦ ¾²¸é ¸ÞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°¨
@@ -137,40 +137,26 @@ case2:                                                              //goto ¿©±â·
 	switch(random1){                //Ã¹ ¹øÂ° Ä«µå ¸ð¾ç, ¼ýÀÚ Á¤ÇÏ±â
         case (1) :
             sprintf(suit1, "Spade");
-            if(card1==1) sprintf(num1, "A");
-            else if(card1==11) sprintf(num1, "J");
-            else if(card1==12) sprintf(num1, "Q");
-            else if(card1==13) sprintf(num1, "K");
-            else sprintf(num1, "%d", card1);
             break;
 
         case (2) :
             sprintf(suit1, "Heart");
-            if(card1==1) sprintf(num1, "A");
-            else if(card1==11) sprintf(num1, "J");
-            else if(card1==12) sprintf(num1, "Q");
-            else if(card1==13) sprintf(num1, "K");
-            else sprintf(num1, "%d", card1);
             break;
 
         case (3) :
             sprintf(suit1, "Diamond");
-            if(card1==1) sprintf(num1, "A");
-            else if(card1==11) sprintf(num1, "J");
-            else if(card1==12) sprintf(num1, "Q");
-            else if(card1==13) sprintf(num1, "K");
-            else sprintf(num1, "%d", card1);
             break;
 
         case (4) :
             sprintf(suit1, "Club");
-            if(card1==1) sprintf(num1, "A");
-            else if(card1==11) sprintf(num1, "J");
-            else if(card1==12) sprintf(num1, "Q");
-            else if(card1==13) sprintf(num1, "K");
-            else sprintf(num1, "%d", card1);
             break;
 	}
+
+	if(card1==1) sprintf(num1, "A");
+        else if(card1==11) sprintf(num1, "J");
+        else if(card1==12) sprintf(num1, "Q");
+        else if(card1==13) sprintf(num1, "K");
+        else sprintf(num1, "%d", card1);
 
 	int random2 = 0;                //º¯¼ö ÃÊ±âÈ­
 	int card2 = 0;
@@ -185,40 +171,29 @@ case2:                                                              //goto ¿©±â·
         switch(random2){
         case (1) :
             sprintf(suit2, "Spade");
-            if(card2==1) sprintf(num2, "A");
-            else if(card2==11) sprintf(num2, "J");
-            else if(card2==12) sprintf(num2, "Q");
-            else if(card2==13) sprintf(num2, "K");
-            else sprintf(num2, "%d", card2);
             break;
 
         case (2) :
             sprintf(suit2, "Heart");
-            if(card2==1) sprintf(num2, "A");
-            else if(card2==11) sprintf(num2, "J");
-            else if(card2==12) sprintf(num2, "Q");
-            else if(card2==13) sprintf(num2, "K");
-            else sprintf(num2, "%d", card2);
             break;
 
         case (3) :
             sprintf(suit2, "Diamond");
             if(card2==1) sprintf(num2, "A");
-            else if(card2==11) sprintf(num2, "J");
-            else if(card2==12) sprintf(num2, "Q");
-            else if(card2==13) sprintf(num2, "K");
-            else sprintf(num2, "%d", card2);
             break;
 
         case (4) :
             sprintf(suit2, "Club");
-            if(card2==1) sprintf(num2, "A");
+            break;
+        }
+
+        if(card2==1) sprintf(num2, "A");
             else if(card2==11) sprintf(num2, "J");
             else if(card2==12) sprintf(num2, "Q");
             else if(card2==13) sprintf(num2, "K");
             else sprintf(num2, "%d", card2);
-            break;
-        }
+
+
         if(suit1 == suit2 && num1 == num2)          //¸¸¾à Ä«µå°¡ ¶È°°´Ù¸é ´Ù½Ã µ¹¸®±â
         {
             int random2 = 0;
@@ -336,6 +311,7 @@ nomal1:
         if(temp>=22){                                           //21À» ³Ñ±ä´Ù¸é ÆÐ¹è
             system("cls");
             printf("ÆÐ¹èÇÏ¼Ì½À´Ï´Ù.\nÁ¡¼ö:%d\n", temp);
+            money += pay*0.1;
             printf("´Ù½ÃÇÏ½Ã°Ú½À´Ï±î?(y/n): ");
             scanf("%s", &yn);
             if(strcmp(yn,"y")==0){
@@ -413,6 +389,7 @@ nomal1:
         }
         if(strcmp(plus,"stand")==0){                                //¸¸¾à stand¸¦ ÀÔ·ÂÇßÀ¸¸é Ä«µå¸¦ ±×¸¸»ÌÀ½
             printf("¸ØÃß¼Ì½À´Ï´Ù.\n");
+            money += pay*0.5;
             Sleep(1000);
             break;
         }
@@ -459,12 +436,6 @@ cs:
     case(13) :
         card2 = 10;
     }
-    while(1)
-    {
-        printf("Ã¹ ¹øÂ° Ä«µå : %s %s\n       Ã¹ ¹øÂ° Ä«µå : %s %s\n", suit1, num1, suit2, num2);                  //splitÀ» ÇÏ¿´À»¶§ Ä«µå ³ª´®(¹Ì¾È¼º)
-        break;
-    }
 
 
 }
-
